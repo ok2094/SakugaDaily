@@ -1,8 +1,7 @@
 defmodule Sakugadaily.DailySakuga do
   use GenServer
 
-  alias Sakugadaily.Utils.SakugaScraper
-
+  alias Sakugadaily.Utils.Anilist
   def start_link([]) do
     GenServer.start_link(__MODULE__, :ok, name: :daily_sakuga)
   end
@@ -13,10 +12,10 @@ defmodule Sakugadaily.DailySakuga do
   end
 
   def post_sakuga do
-    SakugaScraper.sakuga_data()
+    Anilist.post()
     receive do
     after
-      10_000 ->
+      36_000_000 ->
         post_sakuga()
     end
   end
