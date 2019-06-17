@@ -24,3 +24,6 @@ sakugadaily-*.tar
 
 # Elixir LS
 .elixir_ls
+
+# Secrets
+*secret.exs

@@ -13,10 +13,10 @@ defmodule Sakugadaily.DailySakuga do
   end
 
   def post_sakuga do
-    SakugaScraper.get_html()
+    SakugaScraper.sakuga_data()
     receive do
     after
-      2_000 ->
+      10_000 ->
         post_sakuga()
     end
   end
