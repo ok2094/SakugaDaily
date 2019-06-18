@@ -8,7 +8,7 @@ Anilist bot
 
 https://anilist.co/api/v2/oauth/authorize?client_id={your_client_id}&response_type=code
 
-`config/secret.exs`
+create `config/secret.exs`:
 
 ```elixir
 use Mix.Config
@@ -18,4 +18,9 @@ config :sakugadaily,
   client_secret: "your_client_secret",
   auth_code: "authorization code from the link above"
 ```
-things probably gonna change to support auto renew
+
+Then you can start the app. You need to supply a new `auth_code` everytime you start the bot.
+
+### Todo
+
+Docs
