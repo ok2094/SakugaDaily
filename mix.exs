@@ -27,6 +27,7 @@ defmodule Sakugadaily.MixProject do
       {:floki, "~> 0.21.0"},
       {:neuron, "~> 1.2.0"},
       {:httpoison, "~> 1.5"},
+      {:oauth2, "~> 1.0"},
       {:credo, "~> 1.1", only: [:dev, :test], runtime: false}
     ]
   end

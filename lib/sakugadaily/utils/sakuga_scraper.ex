@@ -1,18 +1,26 @@
 defmodule Sakugadaily.Utils.SakugaScraper do
   @url "https://www.sakugabooru.com/post/random"
 
-  def sakuga_data() do
+  def sakuga_data do
     {:ok, url, html} = get_html()
 
-    sakuga_url =
+    video_url =
       html
       |> Floki.attribute(".original-file-unchanged", "href")
       |> List.first()
 
-    {:ok, url, sakuga_url}
+    artist =
+      html
+      |> Floki.attribute(".tag-type-artist", "data-name")
+
+    source =
+      html
+      |> Floki.attribute(".tag-type-copyright", "data-name")
+
+    {:ok, url, video_url, artist, source}
   end
 
-  defp get_html() do
+  defp get_html do
     post_url =
       @url
       |> HTTPoison.head()
