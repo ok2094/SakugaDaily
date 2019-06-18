@@ -1,6 +1,8 @@
 # SakugaDaily
 
-Anilist bot
+Anilist bot that posts sakuga videos from sakugabooru to anilist every 5 hours.
+
+https://anilist.co/user/SakugaDaily/
 
 ## Setup
 
@@ -21,6 +23,6 @@ config :sakugadaily,
 
 Then you can start the app. You need to supply a new `auth_code` everytime you start the bot.
 
-### Todo
+## Todo
 
 Docs
