@@ -8,7 +8,7 @@ defmodule Sakugadaily.Utils.Anilist do
     webm(#{video_url})
     Key Animation: #{List.to_string(Enum.map(artist, &("[" <> &1 <> "] ")))}
     Source: #{List.to_string(Enum.map(source, &("[" <> &1 <> "] ")))}
-    [sakugabooru post](#{sakuga_post_url})
+    [sakugabooru](#{sakuga_post_url})
     """
 
     Neuron.query(
