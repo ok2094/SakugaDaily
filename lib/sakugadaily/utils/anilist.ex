@@ -1,13 +1,15 @@
 defmodule Sakugadaily.Utils.Anilist do
   alias Sakugadaily.Utils.SakugaScraper
 
-  def post(client) do
+  def post(token) do
     {:ok, sakuga_post_url, video_url, artist, source} = SakugaScraper.sakuga_data()
 
-    content = "webm(#{video_url})
-    Key Animation: #{List.to_string(Enum.map(artist, &(&1 <> "\r\n")))}
-    Source: #{List.to_string(Enum.map(source, &(&1 <> "\r\n")))}
-    [sakugabooru post](#{sakuga_post_url})"
+    content = """
+    webm(#{video_url})
+    Key Animation: #{List.to_string(Enum.map(artist, &("[" <> &1 <> "] ")))}
+    Source: #{List.to_string(Enum.map(source, &("[" <> &1 <> "] ")))}
+    [sakugabooru post](#{sakuga_post_url})
+    """
 
     Neuron.query(
       """
@@ -20,7 +22,7 @@ defmodule Sakugadaily.Utils.Anilist do
       """,
       %{text: content},
       url: "https://graphql.anilist.co",
-      headers: [authorization: "Bearer #{client.token.access_token}"]
+      headers: [authorization: "Bearer #{token}"]
     )
 
     IO.puts("Created Post: " <> sakuga_post_url)

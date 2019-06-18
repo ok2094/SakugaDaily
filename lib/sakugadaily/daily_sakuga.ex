@@ -2,21 +2,26 @@ defmodule Sakugadaily.DailySakuga do
   use GenServer
 
   alias Sakugadaily.Utils.Anilist
+  alias Sakugadaily.Utils.Auth
+
   def start_link([]) do
     GenServer.start_link(__MODULE__, :ok, name: :daily_sakuga)
   end
 
   def init(state) do
-    post_sakuga()
+    {:ok, client} = Auth.initialize()
+    token = client.token.access_token
+    post_sakuga(token)
     {:ok, state}
   end
 
-  def post_sakuga do
-    Anilist.post()
+  def post_sakuga(token) do
+    Anilist.post(token)
+
     receive do
     after
-      36_000_000 ->
-        post_sakuga()
+      18_000_000 ->
+        post_sakuga(token)
     end
   end
 end
