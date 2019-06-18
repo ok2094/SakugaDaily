@@ -25,6 +25,6 @@ defmodule Sakugadaily.Utils.Anilist do
       headers: [authorization: "Bearer #{token}"]
     )
 
-    IO.puts("Created Post: " <> sakuga_post_url)
+    IO.puts(DateTime.to_string(DateTime.utc_now()) <> " Created Post: " <> sakuga_post_url)
   end
 end
