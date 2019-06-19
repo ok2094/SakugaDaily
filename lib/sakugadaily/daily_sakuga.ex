@@ -20,7 +20,7 @@ defmodule Sakugadaily.DailySakuga do
 
     receive do
     after
-      18_000_000 ->
+      7_200_000 ->
         post_sakuga(token)
     end
   end

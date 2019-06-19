@@ -6,8 +6,8 @@ defmodule Sakugadaily.Utils.Anilist do
 
     content = """
     webm(#{video_url})
-    Key Animation: #{List.to_string(Enum.map(artist, &("[" <> &1 <> "] ")))}
-    Source: #{List.to_string(Enum.map(source, &("[" <> &1 <> "] ")))}
+    Key Animation: #{list_to_string(artist)}
+    Source: #{list_to_string(source)}
     [sakugabooru](#{sakuga_post_url})
     """
 
@@ -26,5 +26,12 @@ defmodule Sakugadaily.Utils.Anilist do
     )
 
     IO.puts(DateTime.to_string(DateTime.utc_now()) <> " Created Post: " <> sakuga_post_url)
+  end
+
+  defp list_to_string(list) do
+    list
+    |> Enum.map(&("[" <> &1 <> "] "))
+    |> List.to_string()
+    |> String.replace("_", " ")
   end
 end

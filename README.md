@@ -1,6 +1,6 @@
 # SakugaDaily
 
-Anilist bot that posts sakuga videos from sakugabooru to anilist every 5 hours.
+Anilist bot that posts sakuga videos from sakugabooru to anilist.
 
 https://anilist.co/user/SakugaDaily/
 
