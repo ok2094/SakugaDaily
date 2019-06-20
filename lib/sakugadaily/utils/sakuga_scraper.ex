@@ -20,7 +20,13 @@ defmodule Sakugadaily.Utils.SakugaScraper do
     {:ok, url, video_url, artist, source}
   end
 
-  defp get_html do
+  defp get_html(data \\ {}, score \\ 0)
+
+  defp get_html(data, score) when score >= 30 do
+    data
+  end
+
+  defp get_html(_data, _score) do
     post_url =
       @url
       |> HTTPoison.head()
@@ -32,7 +38,19 @@ defmodule Sakugadaily.Utils.SakugaScraper do
       |> HTTPoison.get()
       |> get_body
 
-    {:ok, post_url, post_body}
+    score =
+      post_body
+      |> Floki.find("span[id^='post-score-']")
+      |> Floki.text()
+      |> String.to_integer()
+
+    data = {:ok, post_url, post_body}
+
+    if Floki.find(post_body, ".original-file-unchanged") == [] do
+      get_html()
+    else
+      get_html(data, score)
+    end
   end
 
   defp get_location(response) do
