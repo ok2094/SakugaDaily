@@ -29,8 +29,14 @@ defmodule Sakugadaily.Utils.Anilist do
   end
 
   defp list_to_string(list) do
-    list
-    |> Enum.map(&("[" <> &1 <> "] "))
+    [head | tail] = Enum.reverse(list)
+
+    tail =
+      tail
+      |> Enum.map(&(&1 <> ", "))
+
+    [head | tail]
+    |> Enum.reverse()
     |> List.to_string()
     |> String.replace("_", " ")
   end
