@@ -22,7 +22,7 @@ defmodule Sakugadaily.Utils.SakugaScraper do
 
   defp get_html(data \\ {}, score \\ 0)
 
-  defp get_html(data, score) when score >= 30 do
+  defp get_html(data, score) when score >= 50 do
     data
   end
 
