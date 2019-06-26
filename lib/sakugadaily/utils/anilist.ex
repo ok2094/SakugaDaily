@@ -4,6 +4,8 @@ defmodule Sakugadaily.Utils.Anilist do
   def post(token) do
     {:ok, sakuga_post_url, video_url, artist, source} = SakugaScraper.sakuga_data()
 
+    IO.puts(DateTime.to_string(DateTime.utc_now()) <> " Creating: " <> sakuga_post_url)
+
     content = """
     webm(#{video_url})
     Key Animation: #{list_to_string(artist)}
@@ -29,15 +31,19 @@ defmodule Sakugadaily.Utils.Anilist do
   end
 
   defp list_to_string(list) do
-    [head | tail] = Enum.reverse(list)
+    if list != [] do
+      [head | tail] = Enum.reverse(list)
 
-    tail =
-      tail
-      |> Enum.map(&(&1 <> ", "))
+      tail =
+        tail
+        |> Enum.map(&(&1 <> ", "))
 
-    [head | tail]
-    |> Enum.reverse()
-    |> List.to_string()
-    |> String.replace("_", " ")
+      [head | tail]
+      |> Enum.reverse()
+      |> List.to_string()
+      |> String.replace("_", " ")
+    else
+      "unknown"
+    end
   end
 end
